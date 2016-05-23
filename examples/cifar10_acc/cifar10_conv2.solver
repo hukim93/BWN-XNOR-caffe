@@ -15,16 +15,16 @@ base_lr: 0.001
 momentum: 0.9
 weight_decay: 0.004
 # The learning rate policy
-stepvalue: 60000
-stepvalue: 75000
-stepvalue: 90000
+stepvalue: 25000
+stepvalue: 40000
+stepvalue: 50000
 lr_policy: "multistep"
 # Display every 200 iterations
 display: 200
 # The maximum number of iterations
-max_iter: 90000
+max_iter: 60000
 # snapshot intermediate results
-snapshot: 90000
+snapshot: 60000
 snapshot_prefix: "examples/cifar10_acc/cifar10_conv2"
 # solver mode: CPU or GPU
 solver_mode: GPU

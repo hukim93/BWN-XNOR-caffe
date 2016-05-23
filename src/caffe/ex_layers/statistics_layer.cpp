@@ -16,7 +16,7 @@ void StatisticLayer<Dtype>::Reshape(
 template <typename Dtype>
 void StatisticLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
     const vector<Blob<Dtype>*>& top) {
-  if (current_iter % this->layer_param_.slice_param().axis() == 0 ) {
+  if (current_iter % this->layer_param_.slice_param().axis() == 1 ) {
     Dtype sum = 0;
     const int count = bottom[0]->count();
     const Dtype* bottom_data = bottom[0]->cpu_data();

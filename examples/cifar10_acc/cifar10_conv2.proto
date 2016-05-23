@@ -77,15 +77,9 @@ layer {
 }
 layer {
   name: "norm1"
-  type: "LRN"
+  type: "BatchNorm"
   bottom: "pool1"
   top: "norm1"
-  lrn_param {
-    local_size: 3
-    alpha: 5e-05
-    beta: 0.75
-    norm_region: WITHIN_CHANNEL
-  }
 }
 layer {
   name: "conv2"
@@ -131,15 +125,15 @@ layer {
   }
   convolution_param {
     num_output: 1
-    pad: 2
-    kernel_size: 5
+    pad: 0
+    kernel_size: 1
     stride: 1
     weight_filler {
-      type: "gaussian"
-      std: 0.01
+      type: "xavier"
     }
     bias_filler {
       type: "constant"
+      value: 0
     }
   }
 }
@@ -156,6 +150,15 @@ layer {
   top: "relu2-acc"
   convolution_param {
     num_output: 32
+  }
+}
+layer {
+  name: "relu2-statistic"
+  type: "Statistic"
+  bottom: "relu2-acc-single"
+  top: "conv2-sparsity"
+  slice_param {
+    axis: 100
   }
 }
 layer {
@@ -182,15 +185,9 @@ layer {
 }
 layer {
   name: "norm2"
-  type: "LRN"
+  type: "BatchNorm"
   bottom: "pool2"
   top: "norm2"
-  lrn_param {
-    local_size: 3
-    alpha: 5e-05
-    beta: 0.75
-    norm_region: WITHIN_CHANNEL
-  }
 }
 layer {
   name: "conv3"

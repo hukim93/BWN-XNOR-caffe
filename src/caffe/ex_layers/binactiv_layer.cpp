@@ -81,7 +81,7 @@ void BinActivLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
   const Dtype* top_diff = top[0]->cpu_diff();
   Dtype* bottom_diff = bottom[0]->mutable_cpu_diff();
   for (int index = 0; index < bottom[0]->count(); index++) {
-    if ( sign(bottom_data[index]) <= Dtype(1) ) {
+    if ( std::abs(bottom_data[index]) <= Dtype(1) ) {
       bottom_diff[ index ] = top_diff[ index ];
     } else {
       bottom_diff[ index ] = Dtype(0);

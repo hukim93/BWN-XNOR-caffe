@@ -33,9 +33,6 @@ void SplitConcatLayer<Dtype>::Reshape(
     const vector<Blob<Dtype>*>& bottom, const vector<Blob<Dtype>*>& top) {
   split_layer_->Reshape(bottom, split_top_vec_);
   concat_layer_->Reshape(split_top_vec_, top);
-  if (top.size() == 2) {
-    top[1]->Reshape(1,1,1,1);
-  }
 }
 
 template <typename Dtype>

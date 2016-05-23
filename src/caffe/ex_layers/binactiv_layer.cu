@@ -54,7 +54,7 @@ void BinActivLayer<Dtype>::Forward_gpu(const vector<Blob<Dtype>*>& bottom,
 template <typename Dtype>
 __global__ void BinActiv_BP_Kernal(const int count, const Dtype* bottom_data, const Dtype* top_diff, Dtype* bottom_diff) {
   CUDA_KERNEL_LOOP(index, count) {
-    if ( sign(bottom_data[index]) <= Dtype(1) ) {
+    if ( std::abs(bottom_data[index]) <= Dtype(1) ) {
       bottom_diff[ index ] = top_diff[ index ];
     } else {
       bottom_diff[ index ] = Dtype(0);
